@@ -25,6 +25,7 @@ public class Biblioteca {
 
 
     public void checkOut(Book book) {
+        bookList.put(book, Availability.UNAVAILABLE);
     }
 
     public boolean isCheckedOut(Book book) {

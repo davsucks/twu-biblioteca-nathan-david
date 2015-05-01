@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -57,5 +58,14 @@ public class BibliotecaTest {
         books.put(book, Availability.AVAILBLE);
 
         assertFalse(biblioteca.isCheckedOut(book));
+    }
+
+    @Test
+    public void shouldBeUnavailableAfterCheckingOut() throws Exception {
+        books.put(book, Availability.AVAILBLE);
+
+        biblioteca.checkOut(book);
+
+        assertTrue(biblioteca.isCheckedOut(book));
     }
 }
