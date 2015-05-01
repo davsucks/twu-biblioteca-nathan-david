@@ -1,13 +1,9 @@
 package com.twu.biblioteca;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.CoreMatchers.allOf;
@@ -24,57 +20,44 @@ import static org.mockito.Mockito.when;
 public class BibliotecaTest {
 
     private Biblioteca biblioteca;
-    private Map<Book, Availability> books;
-    private Book book;
+    private List<Book> checkedInBooks;
+    private List<Book> checkedOutBooks;
+    private String title = "Title";
+    private Book book = new Book(title, "Author", "Year");
 
 
     @Before
     public void setUp() {
-        books = new HashMap<>();
-        biblioteca = new Biblioteca(books);
-        book = mock(Book.class);
+        checkedInBooks = new ArrayList<>();
+        checkedOutBooks = new ArrayList<>();
+        biblioteca = new Biblioteca(checkedInBooks, checkedOutBooks);
     }
 
 
     @Test
     public void shouldDisplayAllBookInformation(){
         Book book1 = new Book("Title", "Author", "Year");
-        books.put(book1, Availability.AVAILBLE);
+        checkedInBooks.add(book1);
         Book book2 = new Book("Title2", "Author2", "Year2");
-        books.put(book2, Availability.AVAILBLE);
+        checkedInBooks.add(book2);
 
         assertThat(biblioteca.buildBookList(), allOf(containsString(book1.toString()), containsString("\n"), containsString(book2.toString())));
 
     }
 
     @Test
-    public void shouldBeCheckedOutIfUnavailable() {
-        books.put(book, Availability.UNAVAILABLE);
-
-        assertTrue(biblioteca.isCheckedOut(book));
-    }
-
-    @Test
-    public void shouldBeCheckedInIfAvailable() throws Exception {
-        books.put(book, Availability.AVAILBLE);
-
-        assertFalse(biblioteca.isCheckedOut(book));
-    }
-
-    @Test
     public void shouldBeUnavailableAfterCheckingOut() throws Exception {
-        books.put(book, Availability.AVAILBLE);
+        checkedInBooks.add(book);
 
-        biblioteca.checkOut(book);
+        biblioteca.checkOut(title);
 
         assertTrue(biblioteca.isCheckedOut(book));
     }
 
     @Test
     public void shouldNotBeIncludedInBookListIfCheckedOut() throws Exception {
-        when(book.toString()).thenReturn("Title");
-
-        books.put(book, Availability.UNAVAILABLE);
+        checkedInBooks.add(book);
+        biblioteca.checkOut(title);
 
         assertFalse(biblioteca.buildBookList().contains("Title"));
     }

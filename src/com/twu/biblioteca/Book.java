@@ -26,7 +26,6 @@ public class Book {
         Book book = (Book) o;
 
         return !(title != null ? !title.equals(book.title) : book.title != null);
-
     }
 
     @Override

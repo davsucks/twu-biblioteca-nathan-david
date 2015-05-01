@@ -2,19 +2,25 @@ package com.twu.biblioteca.Command;
 
 
 import com.twu.biblioteca.Biblioteca;
-import com.twu.biblioteca.Book;
+import com.twu.biblioteca.UserInput;
 
-public class CheckoutBookCommand implements Command {
+import java.io.PrintStream;
+
+public class CheckOutBookCommand implements Command {
     private Biblioteca biblioteca;
-    private Book book;
+    private UserInput userInput;
+    private PrintStream printStream;
 
-    public CheckoutBookCommand(Biblioteca biblioteca, Book book) {
+    public CheckOutBookCommand(Biblioteca biblioteca, UserInput userInput, PrintStream printStream) {
         this.biblioteca = biblioteca;
-        this.book = book;
+        this.userInput = userInput;
+        this.printStream = printStream;
     }
 
     @Override
     public void execute() {
-        biblioteca.checkOut(book);
+        printStream.println("Please input the title of the book you would like to check out:");
+        String bookTitle = userInput.returnUserInput();
+        biblioteca.checkOut(bookTitle);
     }
 }
