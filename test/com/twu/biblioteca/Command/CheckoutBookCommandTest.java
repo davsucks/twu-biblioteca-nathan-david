@@ -21,6 +21,7 @@ public class CheckOutBookCommandTest {
     private PrintStream printStream;
     private Biblioteca biblioteca;
     private UserInput userInput;
+    private CheckOutBookCommand checkOutBookCommand;
 
     @Before
     public void setUp() throws Exception {
@@ -28,12 +29,12 @@ public class CheckOutBookCommandTest {
         biblioteca = mock(Biblioteca.class);
         userInput = mock(UserInput.class);
         book = new Book("Title", "Author", "Year");
+        checkOutBookCommand = new CheckOutBookCommand(biblioteca, userInput, printStream);
     }
 
     @Test
     public void shouldCheckOutBookWhenInvoked() throws Exception {
         when(userInput.returnUserInput()).thenReturn(title);
-        CheckOutBookCommand checkOutBookCommand = new CheckOutBookCommand(biblioteca, userInput, printStream);
         checkOutBookCommand.execute();
 
         verify(biblioteca).checkOut(title);
@@ -43,6 +44,5 @@ public class CheckOutBookCommandTest {
     @Ignore
     public void shouldInformUserOfSuccessfulCheckout() {
         Biblioteca biblioteca = mock(Biblioteca.class);
-        CheckOutBookCommand checkOutBookCommand = new CheckOutBookCommand(biblioteca, userInput, printStream);
     }
 }

@@ -35,13 +35,12 @@ public class BibliotecaTest {
 
 
     @Test
-    public void shouldDisplayAllBookInformation(){
-        Book book1 = new Book("Title", "Author", "Year");
-        checkedInBooks.add(book1);
+    public void shouldDisplayAllBooksInformation(){
+        checkedInBooks.add(book);
         Book book2 = new Book("Title2", "Author2", "Year2");
         checkedInBooks.add(book2);
 
-        assertThat(biblioteca.buildBookList(), allOf(containsString(book1.toString()), containsString("\n"), containsString(book2.toString())));
+        assertThat(biblioteca.buildBookList(), allOf(containsString(book.toString()), containsString("\n"), containsString(book2.toString())));
 
     }
 
@@ -57,6 +56,7 @@ public class BibliotecaTest {
     @Test
     public void shouldNotBeIncludedInBookListIfCheckedOut() throws Exception {
         checkedInBooks.add(book);
+
         biblioteca.checkOut(title);
 
         assertFalse(biblioteca.buildBookList().contains("Title"));
