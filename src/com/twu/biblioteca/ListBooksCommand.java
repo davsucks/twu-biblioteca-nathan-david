@@ -1,18 +1,19 @@
 package com.twu.biblioteca;
 
-/**
- * Created by dsucksto on 5/1/15.
- */
+import java.io.PrintStream;
+
 public class ListBooksCommand implements Command {
 
     private Biblioteca biblioteca;
+    private PrintStream printStream;
 
-    public ListBooksCommand(Biblioteca biblioteca) {
+    public ListBooksCommand(Biblioteca biblioteca, PrintStream printStream) {
         this.biblioteca = biblioteca;
+        this.printStream = printStream;
     }
 
     @Override
     public void execute() {
-        biblioteca.buildBookList();
+        printStream.println(biblioteca.buildBookList());
     }
 }
