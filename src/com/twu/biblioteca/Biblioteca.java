@@ -17,8 +17,10 @@ public class Biblioteca {
 
 
         for (Book book : bookList.keySet()) {
-            formattedBookList += counter + ". " + book + "\n";
-            counter++;
+            if (!isCheckedOut(book)) {
+                formattedBookList += counter + ". " + book + "\n";
+                counter++;
+            }
         }
         return formattedBookList;
     }

@@ -15,6 +15,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 /**
@@ -67,5 +68,14 @@ public class BibliotecaTest {
         biblioteca.checkOut(book);
 
         assertTrue(biblioteca.isCheckedOut(book));
+    }
+
+    @Test
+    public void shouldNotBeIncludedInBookListIfCheckedOut() throws Exception {
+        when(book.toString()).thenReturn("Title");
+
+        books.put(book, Availability.UNAVAILABLE);
+
+        assertFalse(biblioteca.buildBookList().contains("Title"));
     }
 }
