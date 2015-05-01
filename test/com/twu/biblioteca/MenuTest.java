@@ -46,7 +46,7 @@ public class MenuTest {
 
     @Test
     public void shouldStartMenuByDisplayingOptions() {
-        when(userInput.returnUserInput()).thenReturn("List Books", "Quit");
+        when(userInput.returnUserInput()).thenReturn("Quit");
 
         menu.chooseOptions();
 
@@ -64,7 +64,7 @@ public class MenuTest {
 
     @Test
     public void shouldDisplayMessageForInvalidUserInput(){
-        when(userInput.returnUserInput()).thenReturn("Slimy", "Quit");
+        when(userInput.returnUserInput()).thenReturn("Invalid Command", "Quit");
 
         menu.chooseOptions();
 
@@ -72,7 +72,7 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldAllowUserToChooseAgainAfterInvalidInput() {
+    public void shouldAllowUserToKeepChoosingUntilQuit() {
         when(userInput.returnUserInput()).thenReturn("Valid Command", "Valid Command", "Quit");
 
         menu.chooseOptions();

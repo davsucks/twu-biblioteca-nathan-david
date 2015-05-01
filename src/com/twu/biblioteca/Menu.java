@@ -34,7 +34,16 @@ public class Menu {
     }
 
     private void displayOptions() {
-        printStream.println("Options:\nList Books\nQuit");
+        printStream.println(buildOptions());
+    }
+
+    private String buildOptions() {
+        String options = "Options:\n";
+        for (String command : commandMap.keySet()) {
+            options += command + "\n";
+        }
+        options += "Quit";
+        return options;
     }
 
     private void actOnUserInput(String userInput) {
