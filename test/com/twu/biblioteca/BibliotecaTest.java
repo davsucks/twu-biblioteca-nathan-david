@@ -23,12 +23,14 @@ public class BibliotecaTest {
 
     private Biblioteca biblioteca;
     private Map<Book, Availability> books;
+    private Book book;
 
 
     @Before
     public void setUp() {
         books = new HashMap<>();
         biblioteca = new Biblioteca(books);
+        book = mock(Book.class);
     }
 
 
@@ -39,26 +41,21 @@ public class BibliotecaTest {
         Book book2 = new Book("Title2", "Author2", "Year2");
         books.put(book2, Availability.AVAILBLE);
 
-        assertThat(biblioteca.buildBookList(), allOf(containsString(book1.toString()),containsString("\n"), containsString(book2.toString())));
+        assertThat(biblioteca.buildBookList(), allOf(containsString(book1.toString()), containsString("\n"), containsString(book2.toString())));
 
     }
 
     @Test
-    public void shouldNotBeAvailableIfCheckedOut() {
-        Book book = mock(Book.class);
+    public void shouldBeCheckedOutIfUnavailable() {
         books.put(book, Availability.UNAVAILABLE);
-
-        biblioteca.checkOut(book);
 
         assertTrue(biblioteca.isCheckedOut(book));
     }
 
     @Test
-    public void shouldBeAvailableIfCheckedIn() throws Exception {
-        Book book = mock(Book.class);
+    public void shouldBeCheckedInIfAvailable() throws Exception {
         books.put(book, Availability.AVAILBLE);
 
         assertFalse(biblioteca.isCheckedOut(book));
     }
-
 }
