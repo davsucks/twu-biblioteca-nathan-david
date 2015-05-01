@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * Created by nzeplowi on 4/29/15.
  */
-public class OptionTest {
+public class UserInputTest {
 
     @Test
     public void shouldName() {

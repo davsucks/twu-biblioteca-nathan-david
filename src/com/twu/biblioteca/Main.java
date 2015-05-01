@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Biblioteca biblioteca = new Biblioteca(books());
-        Menu menu = new Menu(System.out, biblioteca, new Option());
+        Menu menu = new Menu(System.out, biblioteca, new UserInput());
         Application application = new Application(menu);
 
         application.run();

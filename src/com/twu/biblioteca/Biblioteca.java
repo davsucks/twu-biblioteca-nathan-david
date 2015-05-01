@@ -2,9 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.Collection;
 
-/**
- * Created by nzeplowi on 4/28/15.
- */
+
 public class Biblioteca {
     private Collection<Book> bookList;
 
@@ -12,7 +10,7 @@ public class Biblioteca {
         this.bookList = books;
     }
 
-    public String listBooks() {
+    public String buildBookList() {
         int counter = 1;
         String formattedBookList = "";
 
@@ -22,5 +20,7 @@ public class Biblioteca {
         }
         return formattedBookList;
     }
+
+
 }
 

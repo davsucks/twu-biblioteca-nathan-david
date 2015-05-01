@@ -34,7 +34,7 @@ public class BibliotecaTest {
         Book book2 = new Book("Title2", "Author2", "Year2");
         books.add(book2);
 
-        assertThat(biblioteca.listBooks(), allOf(containsString(book1.toString()),containsString("\n"), containsString(book2.toString())));
+        assertThat(biblioteca.buildBookList(), allOf(containsString(book1.toString()),containsString("\n"), containsString(book2.toString())));
 
     }
 

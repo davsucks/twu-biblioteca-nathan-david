@@ -2,19 +2,17 @@ package com.twu.biblioteca;
 
 import java.io.PrintStream;
 
-/**
- * Created by nzeplowi on 4/29/15.
- */
+
 public class Menu {
 
     private final PrintStream printStream;
     private final Biblioteca biblioteca;
-    private Option option;
+    private UserInput userInput;
 
-    public Menu(PrintStream printStream, Biblioteca biblioteca, Option option) {
+    public Menu(PrintStream printStream, Biblioteca biblioteca, UserInput userInput) {
         this.printStream = printStream;
         this.biblioteca = biblioteca;
-        this.option = option;
+        this.userInput = userInput;
     }
 
     public void displayWelcomeMessage() {
@@ -25,20 +23,20 @@ public class Menu {
         String userInput = "Run";
         while(!userInput.equals("Quit")) {
             displayOptions();
-            userInput = option.returnUserOption();
+            userInput = this.userInput.returnUserInput();
             checkUserInput(userInput);
         }
     }
 
     private void displayOptions() {
-        printStream.println("Options:\nList Books");
+        printStream.println("Options:\nList Books\nQuit");
     }
 
     private void checkUserInput(String userInput) {
         if (userInput.equals("List Books")){
-           printStream.println(biblioteca.listBooks());
+           printStream.println(biblioteca.buildBookList());
         } else if(userInput.equals("Quit")) {
-            return;
+
         }
         else {
             printStream.println("Select a valid option!");

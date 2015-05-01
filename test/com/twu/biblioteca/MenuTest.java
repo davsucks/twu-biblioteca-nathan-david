@@ -7,7 +7,6 @@ import org.mockito.Matchers;
 
 import java.io.PrintStream;
 
-import static org.hamcrest.CoreMatchers.endsWith;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.*;
 
@@ -20,14 +19,14 @@ public class MenuTest {
     private PrintStream printStream;
     private Biblioteca biblioteca;
     private Menu menu;
-    private Option option;
+    private UserInput userInput;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
         biblioteca = mock(Biblioteca.class);
-        option = mock(Option.class);
-        menu = new Menu(printStream, biblioteca, option);
+        userInput = mock(UserInput.class);
+        menu = new Menu(printStream, biblioteca, userInput);
     }
 
     @Test
@@ -39,7 +38,7 @@ public class MenuTest {
 
     @Test
     public void shouldStartMenuByDisplayingOptions() {
-        when(option.returnUserOption()).thenReturn("List Books", "Quit");
+        when(userInput.returnUserInput()).thenReturn("List Books", "Quit");
 
         menu.chooseOptions();
 
@@ -48,16 +47,16 @@ public class MenuTest {
 
     @Test
     public void shouldCallListBooksWhenListBooksOptionIsCalled() {
-        when(option.returnUserOption()).thenReturn("List Books", "Quit");
+        when(userInput.returnUserInput()).thenReturn("List Books", "Quit");
 
         menu.chooseOptions();
 
-        verify(biblioteca).listBooks();
+        verify(biblioteca).buildBookList();
     }
 
     @Test
     public void shouldDisplayMessageForInvalidUserInput(){
-        when(option.returnUserOption()).thenReturn("Slimy", "List Books", "Quit");
+        when(userInput.returnUserInput()).thenReturn("Slimy", "List Books", "Quit");
 
         menu.chooseOptions();
 
@@ -66,11 +65,10 @@ public class MenuTest {
 
     @Test
     public void shouldAllowUserToChooseAgainAfterInvalidInput() {
-        when(option.returnUserOption()).thenReturn("Slimy", "List Books","Quit");
+        when(userInput.returnUserInput()).thenReturn("Slimy", "List Books", "Quit");
 
         menu.chooseOptions();
 
         verify(printStream, atLeast(2)).println(contains("List Books"));
     }
-
 }

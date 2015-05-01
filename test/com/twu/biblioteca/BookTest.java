@@ -26,4 +26,5 @@ public class BookTest {
         assertEquals(true, book.toString().matches("\\w+\\s*\\|\\w+\\s*\\|\\d{4}"));
     }
 
+
 }
