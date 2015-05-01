@@ -6,6 +6,8 @@ import org.mockito.Matchers;
 
 
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.*;
@@ -20,13 +22,18 @@ public class MenuTest {
     private Biblioteca biblioteca;
     private Menu menu;
     private UserInput userInput;
+    private Map<String, Command> commandMap;
+    private Command validCommand;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
         biblioteca = mock(Biblioteca.class);
         userInput = mock(UserInput.class);
-        menu = new Menu(printStream, biblioteca, userInput);
+        validCommand = mock(Command.class);
+        commandMap = new HashMap<>();
+        commandMap.put("Valid Command", validCommand);
+        menu = new Menu(printStream, biblioteca, userInput, commandMap);
     }
 
     @Test
@@ -52,6 +59,13 @@ public class MenuTest {
         menu.chooseOptions();
 
         verify(biblioteca).buildBookList();
+    }
+
+    @Test
+    public void shouldExecuteCommandWhenCommandIsValid() {
+        when(userInput.returnUserInput()).thenReturn("Valid Command", "Quit");
+        menu.chooseOptions();
+        verify(validCommand).execute();
     }
 
     @Test

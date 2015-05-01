@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.PrintStream;
+import java.util.Map;
 
 
 public class Menu {
@@ -8,11 +9,13 @@ public class Menu {
     private final PrintStream printStream;
     private final Biblioteca biblioteca;
     private UserInput userInput;
+    private Map<String, Command> commandMap;
 
-    public Menu(PrintStream printStream, Biblioteca biblioteca, UserInput userInput) {
+    public Menu(PrintStream printStream, Biblioteca biblioteca, UserInput userInput, Map<String, Command> commandMap) {
         this.printStream = printStream;
         this.biblioteca = biblioteca;
         this.userInput = userInput;
+        this.commandMap = commandMap;
     }
 
     public void displayWelcomeMessage() {
@@ -33,8 +36,8 @@ public class Menu {
     }
 
     private void checkUserInput(String userInput) {
-        if (userInput.equals("List Books")){
-           printStream.println(biblioteca.buildBookList());
+        if (commandMap.containsKey(userInput)){
+           commandMap.get(userInput).execute();
         } else if(userInput.equals("Quit")) {
 
         }

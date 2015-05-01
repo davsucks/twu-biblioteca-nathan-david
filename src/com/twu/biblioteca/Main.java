@@ -2,12 +2,15 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) {
         Biblioteca biblioteca = new Biblioteca(books());
-        Menu menu = new Menu(System.out, biblioteca, new UserInput());
+        Map<String, Command> commandMap = new HashMap<>();
+        Menu menu = new Menu(System.out, biblioteca, new UserInput(), commandMap);
         Application application = new Application(menu);
 
         application.run();
