@@ -14,8 +14,7 @@ public class Main {
     private static final PrintStream printStream = System.out;
 
     public static void main(String[] args) {
-        Biblioteca biblioteca = new Biblioteca(books());
-        Menu menu = initializeMenu(biblioteca);
+        Menu menu = initializeMenu(new Biblioteca(books()));
         Application application = new Application(menu);
 
         application.run();
