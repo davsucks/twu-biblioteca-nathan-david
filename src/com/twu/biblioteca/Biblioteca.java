@@ -22,5 +22,7 @@ public class Biblioteca {
     }
 
 
+    public void checkOut(Book book) {
+    }
 }
 
