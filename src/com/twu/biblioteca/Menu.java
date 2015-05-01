@@ -1,13 +1,15 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Command.Command;
+
 import java.io.PrintStream;
 import java.util.Map;
 
 
 public class Menu {
 
-    private final PrintStream printStream;
-    private final Biblioteca biblioteca;
+    private PrintStream printStream;
+    private Biblioteca biblioteca;
     private UserInput userInput;
     private Map<String, Command> commandMap;
 
@@ -27,7 +29,7 @@ public class Menu {
         while(!userInput.equals("Quit")) {
             displayOptions();
             userInput = this.userInput.returnUserInput();
-            checkUserInput(userInput);
+            actOnUserInput(userInput);
         }
     }
 
@@ -35,7 +37,7 @@ public class Menu {
         printStream.println("Options:\nList Books\nQuit");
     }
 
-    private void checkUserInput(String userInput) {
+    private void actOnUserInput(String userInput) {
         if (commandMap.containsKey(userInput)){
            commandMap.get(userInput).execute();
         } else if(userInput.equals("Quit")) {

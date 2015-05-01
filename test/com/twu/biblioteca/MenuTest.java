@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Command.Command;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -53,24 +54,17 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldCallListBooksWhenListBooksOptionIsCalled() {
-        when(userInput.returnUserInput()).thenReturn("List Books", "Quit");
-
-        menu.chooseOptions();
-
-        verify(biblioteca).buildBookList();
-    }
-
-    @Test
     public void shouldExecuteCommandWhenCommandIsValid() {
         when(userInput.returnUserInput()).thenReturn("Valid Command", "Quit");
+
         menu.chooseOptions();
+
         verify(validCommand).execute();
     }
 
     @Test
     public void shouldDisplayMessageForInvalidUserInput(){
-        when(userInput.returnUserInput()).thenReturn("Slimy", "List Books", "Quit");
+        when(userInput.returnUserInput()).thenReturn("Slimy", "Quit");
 
         menu.chooseOptions();
 
@@ -79,10 +73,10 @@ public class MenuTest {
 
     @Test
     public void shouldAllowUserToChooseAgainAfterInvalidInput() {
-        when(userInput.returnUserInput()).thenReturn("Slimy", "List Books", "Quit");
+        when(userInput.returnUserInput()).thenReturn("Valid Command", "Valid Command", "Quit");
 
         menu.chooseOptions();
 
-        verify(printStream, atLeast(2)).println(contains("List Books"));
+        verify(validCommand, atLeast(2)).execute();
     }
 }
