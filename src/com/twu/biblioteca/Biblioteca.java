@@ -1,12 +1,13 @@
 package com.twu.biblioteca;
 
 import java.util.Collection;
+import java.util.Map;
 
 
 public class Biblioteca {
-    private Collection<Book> bookList;
+    private Map<Book, Availability> bookList;
 
-    public Biblioteca(Collection<Book> books) {
+    public Biblioteca(Map<Book, Availability> books) {
         this.bookList = books;
     }
 
@@ -14,7 +15,8 @@ public class Biblioteca {
         int counter = 1;
         String formattedBookList = "";
 
-        for (Book book : bookList) {
+
+        for (Book book : bookList.keySet()) {
             formattedBookList += counter + ". " + book + "\n";
             counter++;
         }
@@ -23,6 +25,10 @@ public class Biblioteca {
 
 
     public void checkOut(Book book) {
+    }
+
+    public boolean isCheckedOut(Book book) {
+        return bookList.get(book) != Availability.AVAILBLE;
     }
 }
 

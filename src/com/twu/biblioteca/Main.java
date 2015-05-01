@@ -4,8 +4,6 @@ import com.twu.biblioteca.Command.Command;
 import com.twu.biblioteca.Command.ListBooksCommand;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,11 +24,11 @@ public class Main {
         return new Menu(printStream, biblioteca, new UserInput(), commandMap);
     }
 
-    private static Collection<Book> books() {
-        Collection<Book> books = new ArrayList<Book>();
-        books.add(new Book("Ender's Game", "Someone", "1985"));
-        books.add(new Book("The Hobbit", "J.R. Tolkien", "1940"));
-        books.add(new Book("Harry Potter and the Story of the long Title", "Some British Lady", "1998"));
+    private static Map<Book, Availability> books() {
+        Map<Book, Availability> books = new HashMap<>();
+        books.put(new Book("Ender's Game", "Someone", "1985"), Availability.AVAILBLE);
+        books.put(new Book("The Hobbit", "J.R. Tolkien", "1940"), Availability.AVAILBLE);
+        books.put(new Book("Harry Potter and the Story of the long Title", "Some British Lady", "1998"), Availability.AVAILBLE);
         return books;
     }
 }
