@@ -26,5 +26,9 @@ public class BookTest {
         assertEquals(true, book.toString().matches("\\w+\\s*\\|\\w+\\s*\\|\\d{4}"));
     }
 
-
+    @Test
+    public void shouldCompareTwoBooksByTitle() {
+        String title = "Title";
+        assertEquals(new Book(title, "Author", "Year"), new Book(title, "Another Author", "Another Year"));
+    }
 }
