@@ -27,10 +27,12 @@ public class Biblioteca {
     }
 
 
-    public void checkOut(String title) {
+    public String checkOut(String title) {
         Book book = getCheckedInBookFromTitle(title);
         checkedOutBooks.add(book);
         checkedInBooks.remove(book);
+
+        return "Thank you! Enjoy the book";
     }
 
     private Book getCheckedInBookFromTitle(String title) {

@@ -8,6 +8,7 @@ import java.util.*;
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -60,5 +61,12 @@ public class BibliotecaTest {
         biblioteca.checkOut(title);
 
         assertFalse(biblioteca.buildBookList().contains("Title"));
+    }
+
+    @Test
+    public void shouldInformUserOfSuccessfulCheckout() {
+        checkedInBooks.add(book);
+
+        assertEquals(biblioteca.checkOut(title), "Thank you! Enjoy the book");
     }
 }

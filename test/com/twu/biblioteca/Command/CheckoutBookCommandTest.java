@@ -43,6 +43,11 @@ public class CheckOutBookCommandTest {
     @Test
     @Ignore
     public void shouldInformUserOfSuccessfulCheckout() {
-        Biblioteca biblioteca = mock(Biblioteca.class);
+        when(userInput.returnUserInput()).thenReturn(title);
+        when(biblioteca.checkOut(title)).thenReturn("Success Notification");
+        checkOutBookCommand.execute();
+
+        verify(printStream).println("Success Notification");
+
     }
 }
